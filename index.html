@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1400">
+<title>GLO Presentation</title>
+
+<style>
+body {
+  background-color: #191919;
+  color: #eaeaea;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  padding: 60px;
+}
+
+/* ===== 顶部信息栏 ===== */
+.header-table {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  border-top: 1px solid #444;
+  border-bottom: 1px solid #444;
+  max-width: 1300px;
+  margin: 0 auto 40px;
+  padding: 10px 0;
+  font-size: 14px;
+}
+.header-table div {
+  padding: 6px 12px;
+  border-right: 1px solid #333;
+}
+.header-table div:last-child {
+  border-right: none;
+}
+.header-table .title {
+  color: #fff;
+  font-weight: 700;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.header-table .subtitle {
+  font-weight: 600;
+  color: #eaeaea;
+  font-size: 15px;
+  margin-top: 6px;
+}
+.header-table .muted {
+  color: #999;
+  margin-top: 4px;
+}
+
+/* ===== 主体布局 ===== */
+.main-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+/* ===== 图片列 ===== */
+.image-column {
+  display: flex;
+  gap: 20px;
+}
+.image-column img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border: 1px solid #333;
+  transition: transform 0.8s ease, box-shadow 0.8s ease;
+}
+.image-column img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(255,77,166,0.4);
+}
+
+/* ===== 文字列 ===== */
+.text-column {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.text-column h1 {
+  font-size: 120px;
+  color: #fff;
+  font-weight: 700;
+  margin: 0 0 10px 0;
+  letter-spacing: -1px;
+}
+.text-column .subhead {
+  background: #ff4da6;
+  color: #000;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 10px;
+  display: inline-block;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+}
+.text-column p {
+  font-size: 15px;
+  line-height: 1.8;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+.text-column ol {
+  padding-left: 20px;
+  color: #aaa;
+  font-size: 15px;
+}
+.text-column li {
+  margin-bottom: 4px;
+}
+
+/* ===== 动效基础 ===== */
+.fade-in-scale {
+  opacity: 0;
+  transform: scale(0.9) translateY(40px);
+  transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.fade-in-scale.visible {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+}
+
+/* ===== 分割线（循环霓虹呼吸） ===== */
+.divider {
+  width: 1300px;
+  height: 0.5px;
+  background-color: #ff4da6;
+  border: none;
+  margin: 100px auto;
+  opacity: 0;
+  transform: scaleX(0.8);
+  transform-origin: center;
+  box-shadow: 0 0 0 rgba(255,77,166,0);
+  transition: all 1.4s ease-out;
+}
+.fade-in-line.visible {
+  opacity: 1;
+  transform: scaleX(1);
+  animation: neonPulse 3s ease-in-out infinite alternate;
+}
+
+/* ✨ 霓虹光晕波动动画 ✨ */
+@keyframes neonPulse {
+  0%   { box-shadow: 0 0 5px rgba(255,77,166,0.3), 0 0 15px rgba(255,77,166,0.1); }
+  25%  { box-shadow: 0 0 15px rgba(255,77,166,0.6), 0 0 40px rgba(255,77,166,0.3); }
+  50%  { box-shadow: 0 0 25px rgba(255,77,166,0.9), 0 0 60px rgba(255,77,166,0.5); }
+  75%  { box-shadow: 0 0 20px rgba(255,77,166,0.7), 0 0 40px rgba(255,77,166,0.3); }
+  100% { box-shadow: 0 0 10px rgba(255,77,166,0.4), 0 0 25px rgba(255,77,166,0.1); }
+}
+
+/* Diva 动效 */
+.highlight-diva {
+  color: #ff4da6;
+  position: relative;
+  display: inline-block;
+  transition: text-shadow 0.8s ease;
+}
+.highlight-diva:hover {
+  text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 40px #ff4da6;
+}
+</style>
+</head>
+<body>
+
+<!-- ===== SECTION A ===== -->
+<div class="header-table">
+  <div>
+    <div class="title">📁 BIENVENIDOS A MI MUNDO</div>
+    <div class="subtitle">About Me (updated nov 19 2025)</div>
+    <div class="muted">selection works</div>
+  </div>
+  <div>
+    <div class="title">Address: Xixi Campus, Zhejiang University</div>
+    <div class="subtitle">195-0110-2909</div>
+  </div>
+  <div>
+    <div class="title">Email,INS</div>
+    <div class="subtitle">Gloriarong875@gmail.com 🌐 ruyoggg12_ 📸</div>
+  </div>
+</div>
+
+<div class="main-section fade-in-scale">
+  <div class="image-column" style="width:70%;">
+    <img src="微信图片_20251119121346.jpg" alt="child photo" style="width:48%;">
+    <img src="微信图片_20251119134026.jpg" alt="portrait" style="width:48%;">
+  </div>
+
+  <div class="text-column" style="width:30%;">
+    <h1>GLO</h1>
+    <div class="subhead">ABOUT ME 01</div>
+    <p>
+      I'm a quirky little human who's been a <span class="highlight-diva">diva</span> in training since childhood, always on the hunt for life's little joys.
+      Currently a junior majoring in Art and Technology, I enjoy learning new digital media technologies.
+      I have a very outgoing and sociable personality (except late at night).
+    </p>
+    <ol>
+      <li>My face is my canvas</li>
+      <li>Cat slave with no cats to own</li>
+      <li>Care about mental health</li>
+      <li>Enjoys Kpop and Western pop culture</li>
+      <li>Love to travel</li>
+      <li>Loves spending time with friends and family</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ===== 分割线 ===== -->
+<hr class="divider fade-in-line">
+
+<!-- ===== SECTION B ===== -->
+<div class="main-section" style="margin-top:120px;">
+  <div class="image-column fade-in-scale" style="width:70%; overflow:hidden;">
+    <img src="/Group 3.png" alt="section b image" style="width:100%; object-fit:cover;">
+  </div>
+
+  <div class="text-column" style="width:30%;">
+    <h1>works1</h1>
+    <div class="subhead">ABOUT ME 02</div>
+    <p>
+      From a young age, I've held a particular fascination with cosmetics. 
+      Upon entering university, my own face became one of my canvases, later evolving into the opportunity to create on others' faces. During my second year, I was also honoured to serve as president of the cosmetics club. 
+      For me, cosmetics represent a profoundly creative pursuit.
+    </p>
+    <ol>
+      <li>Childhood</li>
+      <li>Spring Butterfly</li>
+      <li>XG Girl</li>
+      <li>Improvise</li>
+      <li>RRRmantic</li>
+    </ol>
+  </div>
+</div>
+
+<!-- ===== 分割线 ===== -->
+<hr class="divider fade-in-line">
+
+<!-- ===== SECTION C ===== -->
+<div class="main-section" style="margin-top:120px;">
+  <div class="image-column fade-in-scale" style="
+      width:70%;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      grid-gap: 20px;">
+    <img src="微信图片_20251119164655.png" alt="artwork1">
+    <img src="微信图片_20251119164647.jpg" alt="artwork2">
+    <img src="9a818d008e92e4d80e7753cb588d457.jpg" alt="artwork3">
+    <div></div>
+    <img src="微信图片_20251119164848.jpg" alt="artwork4">
+    <img src="7dce6a88a35b75f738e0deec2de877f.jpg" alt="artwork5">
+  </div>
+
+  <div class="text-column" style="width:30%;">
+    <h1>works2</h1>
+    <div class="subhead">ABOUT ME 03</div>
+    <p>
+      These are some of the pieces I have created since starting university, 
+      mostly coursework assignments. I aim for my work to be thought-provoking, 
+      with some pieces addressing social issues and others exploring personal psychological development.
+    </p>
+    <ol>
+      <li>Donec Posuere</li>
+      <li>Finibus Turpis</li>
+      <li>Vitae Feugiat Metus</li>
+      <li>Dapibus Ut</li>
+      <li>Morbi Varius Euismod</li>
+      <li>Lacinia</li>
+      
+    </ol>
+  </div>
+</div>
+
+<script>
+const elements = document.querySelectorAll('.fade-in-scale, .fade-in-line');
+const observer = new IntersectionObserver((entries, observer) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+elements.forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
