@@ -63,6 +63,7 @@ body {
 /* ===== 图片列 ===== */
 .image-column {
   display: flex;
+  flex-wrap: wrap;
   gap: 20px;
 }
 .image-column img {
@@ -70,11 +71,23 @@ body {
   height: auto;
   object-fit: cover;
   border: 1px solid #333;
+  cursor: pointer;
   transition: transform 0.8s ease, box-shadow 0.8s ease;
 }
 .image-column img:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(255,77,166,0.4);
+}
+
+/* ===== 图片淡入动效 ===== */
+.image-column img {
+  opacity: 0;
+  transform: translateY(40px);
+}
+.image-column img.visible {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
 /* ===== 文字列 ===== */
@@ -115,18 +128,7 @@ body {
   margin-bottom: 4px;
 }
 
-/* ===== 动效基础 ===== */
-.fade-in-scale {
-  opacity: 0;
-  transform: scale(0.9) translateY(40px);
-  transition: all 1.2s cubic-bezier(0.19, 1, 0.22, 1);
-}
-.fade-in-scale.visible {
-  opacity: 1;
-  transform: scale(1) translateY(0);
-}
-
-/* ===== 分割线（循环霓虹呼吸） ===== */
+/* ===== 分割线 ===== */
 .divider {
   width: 1300px;
   height: 0.5px;
@@ -164,6 +166,34 @@ body {
 .highlight-diva:hover {
   text-shadow: 0 0 10px #ff4da6, 0 0 20px #ff4da6, 0 0 40px #ff4da6;
 }
+
+/* ===== Lightbox 放大预览 ===== */
+#lightbox {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.85);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+#lightbox img {
+  max-width: 85%;
+  max-height: 85%;
+  box-shadow: 0 0 30px rgba(255,77,166,0.6);
+  border: 2px solid #ff4da6;
+  transition: transform 0.4s ease;
+}
+#lightbox.visible {
+  display: flex;
+  animation: fadeIn 0.6s ease forwards;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
+}
 </style>
 </head>
 <body>
@@ -187,8 +217,8 @@ body {
 
 <div class="main-section fade-in-scale">
   <div class="image-column" style="width:70%;">
-    <img src="微信图片_20251119121346.jpg" alt="child photo" style="width:48%;">
-    <img src="微信图片_20251119134026.jpg" alt="portrait" style="width:48%;">
+    <img src="images/image_20251119121346.jpg" alt="child photo" style="width:48%;">
+    <img src="images/image_20251119134026.jpg" alt="portrait" style="width:48%;">
   </div>
 
   <div class="text-column" style="width:30%;">
@@ -210,21 +240,20 @@ body {
   </div>
 </div>
 
-<!-- ===== 分割线 ===== -->
 <hr class="divider fade-in-line">
 
 <!-- ===== SECTION B ===== -->
 <div class="main-section" style="margin-top:120px;">
   <div class="image-column fade-in-scale" style="width:70%; overflow:hidden;">
-    <img src="/Group 3.png" alt="section b image" style="width:100%; object-fit:cover;">
+    <img src="images/Group 5.png" alt="section b image" style="width:100%; object-fit:cover;">
   </div>
 
   <div class="text-column" style="width:30%;">
-    <h1>works1</h1>
+    <h1>works</h1>
     <div class="subhead">ABOUT ME 02</div>
     <p>
       From a young age, I've held a particular fascination with cosmetics. 
-      Upon entering university, my own face became one of my canvases, later evolving into the opportunity to create on others' faces. During my second year, I was also honoured to serve as president of the cosmetics club. 
+      Upon entering university,my own face became one of my canvases,later evolving into the opportunity to create on others' faces. During my second year, I was also honoured to serve as president of the cosmetics club. 
       For me, cosmetics represent a profoundly creative pursuit.
     </p>
     <ol>
@@ -237,7 +266,6 @@ body {
   </div>
 </div>
 
-<!-- ===== 分割线 ===== -->
 <hr class="divider fade-in-line">
 
 <!-- ===== SECTION C ===== -->
@@ -247,16 +275,16 @@ body {
       display:grid;
       grid-template-columns: repeat(3, 1fr);
       grid-gap: 20px;">
-    <img src="微信图片_20251119164655.png" alt="artwork1">
-    <img src="微信图片_20251119164647.jpg" alt="artwork2">
-    <img src="9a818d008e92e4d80e7753cb588d457.jpg" alt="artwork3">
-    <div></div>
-    <img src="微信图片_20251119164848.jpg" alt="artwork4">
-    <img src="7dce6a88a35b75f738e0deec2de877f.jpg" alt="artwork5">
+    <img src="images/9a818d008e92e4d80e7753cb588d457.jpg" alt="artwork1">
+    <img src="images/7dce6a88a35b75f738e0deec2de877f.jpg" alt="artwork2">
+    <img src="images/154.jpg" alt="artwork3">
+    <img src="images/1433.jpg" alt="artwork4">
+    <img src="images/176.png" alt="artwork5">
+    <img src="images/image_.jpg" alt="artwork6">
   </div>
 
   <div class="text-column" style="width:30%;">
-    <h1>works2</h1>
+    <h1>works</h1>
     <div class="subhead">ABOUT ME 03</div>
     <p>
       These are some of the pieces I have created since starting university, 
@@ -264,20 +292,25 @@ body {
       with some pieces addressing social issues and others exploring personal psychological development.
     </p>
     <ol>
-      <li>Donec Posuere</li>
-      <li>Finibus Turpis</li>
-      <li>Vitae Feugiat Metus</li>
-      <li>Dapibus Ut</li>
-      <li>Morbi Varius Euismod</li>
-      <li>Lacinia</li>
-      
+      <li>Illusion</li>
+      <li>Self-Portrait</li>
+      <li>The Floating Grave</li>
+      <li>Zijin Reconstruction</li>
+      <li>Mist</li>
+      <li>Caisson</li>
     </ol>
   </div>
 </div>
 
+<!-- ===== Lightbox 放大预览 ===== -->
+<div id="lightbox">
+  <img src="" alt="preview">
+</div>
+
 <script>
-const elements = document.querySelectorAll('.fade-in-scale, .fade-in-line');
-const observer = new IntersectionObserver((entries, observer) => {
+// 滚动显现动效
+const fadeElements = document.querySelectorAll('.fade-in-scale, .fade-in-line');
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
@@ -285,7 +318,34 @@ const observer = new IntersectionObserver((entries, observer) => {
     }
   });
 }, { threshold: 0.3 });
-elements.forEach(el => observer.observe(el));
+fadeElements.forEach(el => observer.observe(el));
+
+// 图片逐帧淡入
+const imgs = document.querySelectorAll('.image-column img');
+const imgObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry, i) => {
+    if (entry.isIntersecting) {
+      setTimeout(() => {
+        entry.target.classList.add('visible');
+      }, i * 150); // 逐帧间隔
+      imgObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.2 });
+imgs.forEach(img => imgObserver.observe(img));
+
+// Lightbox 功能
+const lightbox = document.getElementById('lightbox');
+const lightboxImg = lightbox.querySelector('img');
+imgs.forEach(img => {
+  img.addEventListener('click', () => {
+    lightboxImg.src = img.src;
+    lightbox.classList.add('visible');
+  });
+});
+lightbox.addEventListener('click', () => {
+  lightbox.classList.remove('visible');
+});
 </script>
 
 </body>
