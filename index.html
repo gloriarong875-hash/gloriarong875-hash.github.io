@@ -14,6 +14,37 @@ body {
   padding: 60px;
 }
 
+/* 🌸 ===== 新增：鼠标跟随玫粉光斑 ===== */
+#cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  pointer-events: none;
+  background: radial-gradient(circle, rgba(255,77,166,0.4) 0%, rgba(255,77,166,0.05) 70%);
+  filter: blur(25px);
+  mix-blend-mode: screen;
+  z-index: 0;
+  opacity: 0.8;
+  transform: translate(-50%, -50%);
+  animation: glowPulse 2.8s ease-in-out infinite alternate;
+  transition: all 0.25s ease-out;
+}
+@keyframes glowPulse {
+  0% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+  50% { opacity: 1; transform: translate(-50%, -50%) scale(1.05); }
+  100% { opacity: 0.6; transform: translate(-50%, -50%) scale(0.95); }
+}
+#cursor-glow.hover {
+  width: 160px;
+  height: 160px;
+  background: radial-gradient(circle, rgba(255,77,166,0.6) 0%, rgba(255,77,166,0.1) 70%);
+  filter: blur(30px);
+  opacity: 1;
+}
+
 /* ===== 顶部信息栏 ===== */
 .header-table {
   display: grid;
@@ -198,6 +229,10 @@ body {
 </head>
 <body>
 
+<!-- 🌸 ===== 新增：光斑层 ===== -->
+<div id="cursor-glow"></div>
+
+
 <!-- ===== SECTION A ===== -->
 <div class="header-table">
   <div>
@@ -370,11 +405,9 @@ body {
       <li>Strolling with friends</li>
       <li>Create</li>
       <li>Music and Motion</li>
-
     </ol>
   </div>
 </div>
-
 
 <!-- ===== Lightbox 放大预览 ===== -->
 <div id="lightbox">
@@ -382,7 +415,21 @@ body {
 </div>
 
 <script>
-// 滚动显现动效
+// 🌸 ===== 新增：光斑移动逻辑 =====
+const glow = document.getElementById('cursor-glow');
+document.addEventListener('mousemove', (e) => {
+  glow.style.left = `${e.clientX}px`;
+  glow.style.top = `${e.clientY}px`;
+});
+
+// 图片悬停增强光斑效果
+const imgs = document.querySelectorAll('.image-column img');
+imgs.forEach(img => {
+  img.addEventListener('mouseenter', () => glow.classList.add('hover'));
+  img.addEventListener('mouseleave', () => glow.classList.remove('hover'));
+});
+
+// ===== 你原来的动效逻辑（保留） =====
 const fadeElements = document.querySelectorAll('.fade-in-scale, .fade-in-line');
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
@@ -394,21 +441,18 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.3 });
 fadeElements.forEach(el => observer.observe(el));
 
-// 图片逐帧淡入
-const imgs = document.querySelectorAll('.image-column img');
 const imgObserver = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (entry.isIntersecting) {
       setTimeout(() => {
         entry.target.classList.add('visible');
-      }, i * 150); // 逐帧间隔
+      }, i * 150);
       imgObserver.unobserve(entry.target);
     }
   });
 }, { threshold: 0.2 });
 imgs.forEach(img => imgObserver.observe(img));
 
-// Lightbox 功能
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
 imgs.forEach(img => {
