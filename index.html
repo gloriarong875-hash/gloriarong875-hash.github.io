@@ -44,6 +44,13 @@
             margin-bottom: 0px;
         }
 
+        .portfolio-logo {
+            display: inline-block;
+            width: 3.65em;
+            height: auto;
+            vertical-align: -0.16em;
+        }
+
         .menu-list {
             list-style: none;
             padding: 0;
@@ -344,7 +351,7 @@
 
     <!-- 首页左上角标题和作品目录：鼠标悬停标题会出现封面，点击标题会打开作品窗口 -->
     <div id="menu-container">
-        <div class="site-header">Gloria's Portfolio<br><button class="cv-link" type="button" onclick="openCV()">C.V.</button></div>
+        <div class="site-header">Gloria's <img class="portfolio-logo" src="images/por.png" alt="Portfolio"><br><button class="cv-link" type="button" onclick="openCV()">C.V.</button></div>
         <ul class="menu-list">
             <li class="menu-item" onclick="openProject(0)">Work 01—My First Lamp</li>
             <li class="menu-item" onclick="openProject(1)">Work 02—Sarcasm</li>
